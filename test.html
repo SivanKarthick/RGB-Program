@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
+		<style>
+
+			.container li{
+				display:inline-block;
+				background:#fff;
+				width:10px;
+				height:10px;
+				padding:10px;
+				margin:0 10px;
+				border-radius:3px;
+			}
+			.container li:hover{
+				box-shadow:0px 0px 10px 2px black;
+				cursor:pointer;
+			}
+			
+		</style>
+		
+	</head>
+	<body>
+	<input type="text" id="numvalue" onkeypress="" /> <button id="submitval">Submit</button>
+		<br/><br/><br/>
+		<div class="container">
+		</div>
+		
+		<script>
+$(document).ready(function() {
+	$("#submitval").click(function() {
+		$( ".container" ).html("");
+		var numval= $('#numvalue').val();
+		if(numval>0) {
+			for(i=1;i<=numval;i++) {
+				$(".container").append("<li></li>");
+			}
+			$('.container li').each(function(i) {
+				$(this).attr('id', 'myid-' + i);
+				//console.log(i);
+				showvalue($(".container li:first-child"));
+			});
+			$(".container li").click(function() {
+				showvalue(this);
+			});
+		} return true;
+	});
+	
+	$("#numvalue").keypress(function (e) {
+		 if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			return false;
+		}
+	});
+});
+
+function showvalue(valv) {
+	var id = $(valv).attr('id'), dh = ["red","green","blue"];
+	var sep = id.split('-');
+	var sepinc = sep[1];
+	//console.log(sepinc);
+	var sepdec = sep[1];
+	//console.log(sepdec);
+	var li = $('.container li').length, b
+	for(a =0; a<li;a++) {
+		var mov = sepinc;
+		for(b=0;b<3;b++) {
+			$("#myid-"+sepinc).css("background",dh[b]);
+			mov = sepinc++;
+		} b=0;
+	}
+	for(a =0; a<li;a++) {
+		var mov = sepdec;
+		for(b=0;b<3;b++) {
+			$("#myid-"+sepdec).css("background",dh[b]);
+			mov = sepdec--;
+		} b=0;
+	}
+}
+
+</script>
+</body>
+</html>
